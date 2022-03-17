@@ -9,7 +9,6 @@ const emojify = (text: string) => twemoji.parse(text, twOptions);
 
 const notoBold = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Bold.otf`).toString('base64');
 const notoMedium = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Medium.otf`).toString('base64');
-const notoLight = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Light.otf`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
@@ -32,13 +31,6 @@ function getCss(theme: string, fontSize: string) {
         font-style: normal;
         font-weight: 500;
         src: url(data:font/otf;charset=utf-8;base64,${notoMedium}) format('opentype');
-    }
-
-    @font-face {
-        font-family: 'Noto Sans Japanese';
-        font-style: normal;
-        font-weight: 300;
-        src: url(data:font/otf;charset=utf-8;base64,${notoLight}) format('opentype');
     }
 
     body {
