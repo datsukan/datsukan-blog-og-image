@@ -42,6 +42,7 @@ function getCss() {
         text-align: center;
         align-items: center;
         justify-content: center;
+        font-family: 'Noto Sans JP', sans-serif;
     }
 
     .frame {
