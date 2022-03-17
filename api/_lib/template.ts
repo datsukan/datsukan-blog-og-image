@@ -94,7 +94,7 @@ function getCss(theme: string, fontSize: string) {
     }
 
     .heading {
-        font-family: 'Noto Sans JP', sans-serif;
+        font-family: 'Inter', 'Noto Sans JP', sans-serif;
         font-size: ${sanitizeHtml(fontSize)};
         font-style: normal;
         font-weight: 500;
