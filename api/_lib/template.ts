@@ -7,12 +7,9 @@ const twemoji = require('twemoji');
 const twOptions = { folder: 'svg', ext: '.svg' };
 const emojify = (text: string) => twemoji.parse(text, twOptions);
 
-const notoBlack = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Black.otf`).toString('base64');
 const notoBold = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Bold.otf`).toString('base64');
 const notoMedium = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Medium.otf`).toString('base64');
-const notoRegular = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Regular.otf`).toString('base64');
 const notoLight = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Light.otf`).toString('base64');
-const notoThin = readFileSync(`${__dirname}/../_fonts/NotoSansJP-Thin.otf`).toString('base64');
 
 function getCss(theme: string, fontSize: string) {
     let background = 'white';
@@ -23,13 +20,6 @@ function getCss(theme: string, fontSize: string) {
         foreground = 'white';
     }
     return `
-    @font-face {
-        font-family: 'Noto Sans Japanese';
-        font-style: normal;
-        font-weight: 900;
-        src: url(data:font/otf;charset=utf-8;base64,${notoBlack}) format('opentype');
-    }
-
     @font-face {
         font-family: 'Noto Sans Japanese';
         font-style: normal;
@@ -47,22 +37,8 @@ function getCss(theme: string, fontSize: string) {
     @font-face {
         font-family: 'Noto Sans Japanese';
         font-style: normal;
-        font-weight: 400;
-        src: url(data:font/otf;charset=utf-8;base64,${notoRegular}) format('opentype');
-    }
-
-    @font-face {
-        font-family: 'Noto Sans Japanese';
-        font-style: normal;
         font-weight: 300;
         src: url(data:font/otf;charset=utf-8;base64,${notoLight}) format('opentype');
-    }
-
-    @font-face {
-        font-family: 'Noto Sans Japanese';
-        font-style: normal;
-        font-weight: 100;
-        src: url(data:font/otf;charset=utf-8;base64,${notoThin}) format('opentype');
     }
 
     body {
