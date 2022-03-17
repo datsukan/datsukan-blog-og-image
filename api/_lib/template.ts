@@ -11,14 +11,7 @@ const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString
 const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
 const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
 
-function getCss(theme: string, fontSize: string) {
-    let background = 'white';
-    let foreground = 'black';
-
-    if (theme === 'dark') {
-        background = 'black';
-        foreground = 'white';
-    }
+function getCss() {
     return `
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
 
@@ -44,13 +37,16 @@ function getCss(theme: string, fontSize: string) {
       }
 
     body {
-        background: ${background};
-        background-size: 100px 100px;
         height: 100vh;
         display: flex;
         text-align: center;
         align-items: center;
         justify-content: center;
+    }
+
+    .frame {
+        width: 1200px;
+        height: 630px;
     }
 
     code {
@@ -64,83 +60,54 @@ function getCss(theme: string, fontSize: string) {
         content: '\`';
     }
 
-    .logo-wrapper {
-        display: flex;
-        align-items: center;
-        align-content: center;
-        justify-content: center;
-        justify-items: center;
-    }
-
     .logo {
         margin: 0 75px;
-    }
-
-    .plus {
-        color: #BBB;
-        font-family: Times New Roman, Verdana;
-        font-size: 100px;
-    }
-
-    .spacer {
-        margin: 150px;
-    }
-
-    .emoji {
-        height: 1em;
-        width: 1em;
-        margin: 0 .05em 0 .1em;
-        vertical-align: -0.1em;
-    }
-
-    .heading {
-        font-family: 'Inter', 'Noto Sans JP', sans-serif;
-        font-size: ${sanitizeHtml(fontSize)};
-        font-style: normal;
-        font-weight: 500;
-        color: ${foreground};
-        line-height: 1.8;
     }`;
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-    const { text, theme, md, fontSize, images, widths, heights } = parsedReq;
+    const { text, md, emoji, publishedAt } = parsedReq;
     return `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
     <title>Generated Image</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com?plugins=line-clamp"></script>
     <style>
-        ${getCss(theme, fontSize)}
+        ${getCss()}
     </style>
     <body>
-        <div>
-            <div class="spacer">
-            <div class="logo-wrapper">
-                ${images.map((img, i) =>
-                    getPlusSign(i) + getImage(img, widths[i], heights[i])
-                ).join('')}
-            </div>
-            <div class="spacer">
-            <div class="heading">${emojify(
-                md ? marked(text) : sanitizeHtml(text)
-            )}
+        <div class="frame p-12 bg-gradient-to-tr from-green-200 to-blue-200">
+            <div class="px-16 py-14 h-full w-full bg-white rounded-3xl shadow-xl flex flex-col justify-between">
+                <div class="flex flex-col items-center justify-center gap-3">
+                    <img src="${twemojiURL(emoji)}" class="w-24 h-24">
+                    <div class="my-6">
+                    <p class="max-h-52 text-5xl text-gray-800 font-bold leading-normal line-clamp-3">
+                        ${emojify(
+                            md ? marked(text) : sanitizeHtml(text)
+                        )}
+                    </p>
+                    </div>
+                </div>
+                <div class="w-full flex justify-between items-center">
+                    <div class="text-2xl text-gray-500 font-bold">${publishedAt}</div>
+                    <div class="flex items-center gap-4">
+                        <div class="rounded-full overflow-hidden w-14 h-14">
+                            <img src="https://datsukan.me/_next/image?url=%2Fimages%2Favatar.jpg&w=96&q=75" />
+                        </div>
+                        <span class="text-2xl text-gray-800 font-bold">datsukan</span>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
 </html>`;
 }
 
-function getImage(src: string, width ='auto', height = '225') {
-    return `<img
-        class="logo"
-        alt="Generated Image"
-        src="${sanitizeHtml(src)}"
-        width="${sanitizeHtml(width)}"
-        height="${sanitizeHtml(height)}"
-    />`
-}
+function twemojiURL(emoji: string) {
+    const codePoint = twemoji.convert.toCodePoint(emoji)
+    const baseUrl = "https://twemoji.maxcdn.com/v/latest/72x72/"
+    const url = `${baseUrl}${codePoint.split("-")[0]}.png`
 
-function getPlusSign(i: number) {
-    return i === 0 ? '' : '<div class="plus">+</div>';
+    return url
 }
