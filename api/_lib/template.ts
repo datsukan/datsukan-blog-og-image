@@ -11,10 +11,16 @@ const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString
 const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
 const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
 
+const tofuBlack = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Black.woff2`).toString('base64');
+const tofuBold = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Bold.woff2`).toString('base64');
+const tofuMedium = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Medium.woff2`).toString('base64');
+const tofuRegular = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Regular.woff2`).toString('base64');
+const tofuLight = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Light.woff2`).toString('base64');
+const tofuThin = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Thin.woff2`).toString('base64');
+
+
 function getCss() {
     return `
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
-
     @font-face {
         font-family: 'Inter';
         font-style:  normal;
@@ -34,7 +40,45 @@ function getCss() {
         font-style: normal;
         font-weight: normal;
         src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
-      }
+    }
+
+    @font-face {
+        font-family: 'Noto Sans Japanese';
+        font-style: normal;
+        font-weight: 900;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuBlack}) format('opentype');
+    }
+
+    @font-face {
+        font-family: 'Noto Sans Japanese';
+        font-style: normal;
+        font-weight: 700;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuBold}) format('opentype');
+    }
+    @font-face {
+        font-family: 'Noto Sans Japanese';
+        font-style: normal;
+        font-weight: 500;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuMedium}) format('opentype');
+    }
+    @font-face {
+        font-family: 'Noto Sans Japanese';
+        font-style: normal;
+        font-weight: 400;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuRegular}) format('opentype');
+    }
+    @font-face {
+        font-family: 'Noto Sans Japanese';
+        font-style: normal;
+        font-weight: 300;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuLight}) format('opentype');
+    }
+    @font-face {
+        font-family: 'Noto Sans Japanese';
+        font-style: normal;
+        font-weight: 100;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuThin}) format('opentype');
+    }
 
     body {
         height: 100vh;
