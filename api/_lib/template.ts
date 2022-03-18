@@ -43,20 +43,21 @@ function getCss() {
         font-family: 'Noto Sans Japanese';
         font-style: normal;
         font-weight: 700;
-        src: url(data:font/otf;charset=utf-8;base64,${tofuBold}) format('opentype');
+        src: url(data:font/otf;charset=utf-8;base64,${tofuBold}) format('woff2');
     }
+
     @font-face {
         font-family: 'Noto Sans Japanese';
         font-style: normal;
         font-weight: 500;
-        src: url(data:font/otf;charset=utf-8;base64,${tofuMedium}) format('opentype');
+        src: url(data:font/otf;charset=utf-8;base64,${tofuMedium}) format('woff2');
     }
-    }
+
     @font-face {
         font-family: 'Noto Sans Japanese';
         font-style: normal;
         font-weight: 300;
-        src: url(data:font/otf;charset=utf-8;base64,${tofuLight}) format('opentype');
+        src: url(data:font/otf;charset=utf-8;base64,${tofuLight}) format('woff2');
     }
 
     body {
