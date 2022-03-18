@@ -39,28 +39,26 @@ function getCss() {
         src: url(data:font/woff2;charset=utf-8;base64,${mono})  format("woff2");
     }
 
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
+    @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 700;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuBold}) format('woff2');
+    }
 
-    // @font-face {
-    //     font-family: 'Noto Sans Japanese';
-    //     font-style: normal;
-    //     font-weight: 700;
-    //     src: url(data:font/otf;charset=utf-8;base64,${tofuBold}) format('woff2');
-    // }
+    @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 500;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuMedium}) format('woff2');
+    }
 
-    // @font-face {
-    //     font-family: 'Noto Sans Japanese';
-    //     font-style: normal;
-    //     font-weight: 500;
-    //     src: url(data:font/otf;charset=utf-8;base64,${tofuMedium}) format('woff2');
-    // }
-
-    // @font-face {
-    //     font-family: 'Noto Sans Japanese';
-    //     font-style: normal;
-    //     font-weight: 300;
-    //     src: url(data:font/otf;charset=utf-8;base64,${tofuLight}) format('woff2');
-    // }
+    @font-face {
+        font-family: 'Noto Sans JP';
+        font-style: normal;
+        font-weight: 300;
+        src: url(data:font/otf;charset=utf-8;base64,${tofuLight}) format('woff2');
+    }
 
     body {
         height: 100vh;
