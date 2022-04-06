@@ -1,6 +1,7 @@
 .now
 .vercel
 .env*
+!.env.example
 node_modules
 api/dist
 public/dist
