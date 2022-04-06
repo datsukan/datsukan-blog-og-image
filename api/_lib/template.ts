@@ -1,23 +1,34 @@
+import { readFileSync } from "fs"
+import { marked } from "marked"
+import * as cheerio from "cheerio"
+import { sanitizeHtml } from "./sanitizer"
+import { ParsedRequest } from "./types"
+const twemoji = require("twemoji")
+const twOptions = { folder: "svg", ext: ".svg" }
+const emojify = (text: string) => twemoji.parse(text, twOptions)
 
-import { readFileSync } from 'fs';
-import { marked } from 'marked';
-import { sanitizeHtml } from './sanitizer';
-import { ParsedRequest } from './types';
-const twemoji = require('twemoji');
-const twOptions = { folder: 'svg', ext: '.svg' };
-const emojify = (text: string) => twemoji.parse(text, twOptions);
+const rglr = readFileSync(
+  `${__dirname}/../_fonts/Inter-Regular.woff2`
+).toString("base64")
+const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString(
+  "base64"
+)
+const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString(
+  "base64"
+)
 
-const rglr = readFileSync(`${__dirname}/../_fonts/Inter-Regular.woff2`).toString('base64');
-const bold = readFileSync(`${__dirname}/../_fonts/Inter-Bold.woff2`).toString('base64');
-const mono = readFileSync(`${__dirname}/../_fonts/Vera-Mono.woff2`).toString('base64');
-
-const tofuBold = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Bold.woff2`).toString('base64');
-const tofuMedium = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Medium.woff2`).toString('base64');
-const tofuLight = readFileSync(`${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Light.woff2`).toString('base64');
-
+const tofuBold = readFileSync(
+  `${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Bold.woff2`
+).toString("base64")
+const tofuMedium = readFileSync(
+  `${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Medium.woff2`
+).toString("base64")
+const tofuLight = readFileSync(
+  `${__dirname}/../_fonts/Noto_Sans_JP/NotoSansJP-Light.woff2`
+).toString("base64")
 
 function getCss() {
-    return `
+  return `
     @font-face {
         font-family: 'Inter';
         font-style:  normal;
@@ -87,12 +98,12 @@ function getCss() {
 
     .logo {
         margin: 0 75px;
-    }`;
+    }`
 }
 
 export function getHtml(parsedReq: ParsedRequest) {
-    const { text, md, emoji, publishedAt } = parsedReq;
-    return `<!DOCTYPE html>
+  const { text, md, emoji, publishedAt } = parsedReq
+  return `<!DOCTYPE html>
 <html>
     <meta charset="utf-8">
     <title>Generated Image</title>
@@ -108,9 +119,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                     <img src="${twemojiURL(emoji)}" class="w-24 h-24">
                     <div class="my-6">
                     <p class="max-h-52 text-5xl text-gray-800 font-bold leading-normal line-clamp-3">
-                        ${emojify(
-                            md ? marked(text) : sanitizeHtml(text)
-                        )}
+                        ${emojify(md ? marked(text) : sanitizeHtml(text))}
                     </p>
                     </div>
                 </div>
@@ -126,13 +135,13 @@ export function getHtml(parsedReq: ParsedRequest) {
             </div>
         </div>
     </body>
-</html>`;
+</html>`
 }
 
 function twemojiURL(emoji: string) {
-    const codePoint = twemoji.convert.toCodePoint(emoji)
-    const baseUrl = "https://twemoji.maxcdn.com/v/latest/svg/"
-    const url = `${baseUrl}${codePoint}.svg`
+  const html = twemoji.parse(emoji, { folder: "svg", ext: ".svg" })
+  const $ = cheerio.load(html)
+  const url = $("img").attr("src")
 
-    return url
+  return url
 }
