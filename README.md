@@ -1,27 +1,21 @@
-# vercel/og-image with japanese fonts
+# datsukan blog og-image
 
-[vercel/og-image](https://github.com/vercel/og-image)を日本語対応させたプロジェクトです。
-それ以外はローカル環境で実行できるようにするための設定をいくつか追加しています。
+[datsukan/og-image-with-japanese-fonts](https://github.com/datsukan/og-image-with-japanese-fonts)をdatsukan blog向けにカスタマイズしたプロジェクトです。  
+使い方は変わらないので[vercel/og-image](https://github.com/vercel/og-image)および[datsukan/og-image-with-japanese-fonts](https://github.com/datsukan/og-image-with-japanese-fonts)を参照してください。
 
-使い方は変わらないので[本家](https://github.com/vercel/og-image)を参照してください。
+## Note \ 注意事項
 
-## 注意
+個人サイトのソースであるため、不特定多数の人々の利用を想定していません。  
+日本語による記述箇所が多数あります。
 
-### ローカル環境での実行
+## Author \ 著者
 
-下記のコマンドで`.env`ファイルを作成してください。
+datsukan
 
-```sh
-cp .env.example .env
-```
+## License \ ライセンス
 
-### フォント
+このリポジトリの内容は[MIT License](https://en.wikipedia.org/wiki/MIT_License)です。  
+ただし画像/アイコン/コンテンツについては対象外です。  
+このプロジェクトに含まれる画像/アイコン/コンテンツを使用または配布することは許可されていません。
 
-このプロジェクトでは[Noto Sans JP](https://fonts.google.com/noto/specimen/Noto+Sans+JP)を使用しています。
-他のフォントを使いたい場合は任意で差し替えてください。
-フォントの追加方法は[解説記事](https://blog.datsukan.me/vercel-og-image-japanese-fonts)を参照してください。
-なお、日本語フォントはサイズが大きいので、2～3ファイルの追加に留めることを推奨します。
-
-## ライセンス
-
-[MIT License](https://en.wikipedia.org/wiki/MIT_License)
+You are not allowed to use or distribute images/icons/contents included in this project.
