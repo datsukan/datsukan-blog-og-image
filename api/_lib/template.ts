@@ -145,7 +145,7 @@ function twemojiURL(emoji: string) {
   const html = twemoji.parse(emoji, {
     folder: "svg",
     ext: ".svg",
-    baseUrl: baseUrl,
+    base: baseUrl,
   })
   const $ = cheerio.load(html)
   const url = $("img").attr("src")
