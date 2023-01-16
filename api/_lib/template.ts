@@ -139,7 +139,13 @@ export function getHtml(parsedReq: ParsedRequest) {
 }
 
 function twemojiURL(emoji: string) {
-  const html = twemoji.parse(emoji, { folder: "svg", ext: ".svg" })
+  const baseUrl =
+    "https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/"
+  const html = twemoji.parse(emoji, {
+    folder: "svg",
+    ext: ".svg",
+    baseUrl: baseUrl,
+  })
   const $ = cheerio.load(html)
   const url = $("img").attr("src")
 
