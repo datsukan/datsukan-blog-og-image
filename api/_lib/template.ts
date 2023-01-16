@@ -118,7 +118,6 @@ export function getHtml(parsedReq: ParsedRequest) {
                 <div class="flex flex-col items-center justify-center gap-3">
                     <img src="${twemojiURL(emoji)}" class="w-24 h-24">
                     <div class="my-6">
-                    <p>${twemojiURL(emoji)}</p>
                     <p class="max-h-52 text-5xl text-gray-800 font-bold leading-normal line-clamp-3">
                         ${emojify(md ? marked(text) : sanitizeHtml(text))}
                     </p>
