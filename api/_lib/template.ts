@@ -140,8 +140,7 @@ export function getHtml(parsedReq: ParsedRequest) {
 }
 
 function twemojiURL(emoji: string) {
-  const baseUrl =
-    "https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/"
+  const baseUrl = "https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/"
   const html = twemoji.parse(emoji, {
     folder: "svg",
     ext: ".svg",
