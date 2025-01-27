@@ -101,7 +101,7 @@ function getCss() {
     }`
 }
 
-export function getHtml(parsedReq: ParsedRequest) {
+export async function getHtml(parsedReq: ParsedRequest) {
   const { text, md, emoji, publishedAt } = parsedReq
   return `<!DOCTYPE html>
 <html>
@@ -119,7 +119,7 @@ export function getHtml(parsedReq: ParsedRequest) {
                     <img src="${twemojiURL(emoji)}" class="w-24 h-24">
                     <div class="my-6">
                     <p class="max-h-52 text-5xl text-gray-800 font-bold leading-normal line-clamp-3">
-                        ${emojify(md ? marked(text) : sanitizeHtml(text))}
+                        ${emojify(md ? await marked(text) : sanitizeHtml(text))}
                     </p>
                     </div>
                 </div>
